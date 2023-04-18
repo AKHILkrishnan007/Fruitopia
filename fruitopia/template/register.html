@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registration</title>
+</head><style>
+    .head{
+
+        background-color: rgba(250, 250, 210, 0.605);
+        width: 300px;
+        opacity: 20px;
+        margin-top: 80px;
+        padding: 20px;
+        border-radius: 10px;
+
+
+    }
+    .head input{
+        padding: 5px;
+        border: none;
+        border-bottom: 2px solid black;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        width: 200px;
+        height: 30px;
+    }
+    .head button{
+        width: 200px;
+        height: 35px;
+        padding: 5px;
+        background-color: brown;
+        color: antiquewhite;
+        border-radius: 20px;
+        margin-bottom: 60px;
+        }
+</style>
+<body background="{% static 'images\pexels-julia-nagy-1327838.jpg' %}">
+    <center><div class="head">
+        <h1>Registration</h1>
+        <form action="registersub">
+        <input type="text" placeholder="First name" required name="fname"><br><br>
+        <input type="text" placeholder="Last name" name="lname"><br><br>
+        <input type="email" placeholder="Email"m name="ename"><br><br>
+        <input type="password" placeholder="Password" required name="pwd"><br><br>
+        <input type="password" placeholder="Re-Password" required name="rpwd"><br><br>
+        <button type="submit">Submit</button>
+    </div></center></form>
+    
+</body>
+</html>

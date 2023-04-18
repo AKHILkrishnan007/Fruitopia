@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+</head><style>
+    .head{
+
+        background-color: rgba(250, 250, 210, 0.674);
+        width: 300px;
+        opacity: 20px;
+        margin-top: 140px;
+        padding: 20px;
+        border-radius: 10px;
+
+
+    }
+    .head input{
+        padding: 5px;
+        border: none;
+        border-bottom: 2px solid black;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        width: 200px;
+        height: 30px;
+    }
+    .head button{
+        width: 200px;
+        height: 35px;
+        padding: 5px;
+        background-color: brown;
+        color: antiquewhite;
+        border-radius: 20px;
+        margin-bottom: 60px;
+        }
+</style>
+<body background="{% static 'images\pexels-pixabay-89778.jpg' %}">
+    <center><div class="head">
+        <h1>login</h1>
+        <form action="loginsub/">
+        <input type="text" placeholder="Username" required name="uname"><br><br>
+        <input type="password" placeholder="Password" required name="pname"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    </div></center>
+</body>
+</html>
