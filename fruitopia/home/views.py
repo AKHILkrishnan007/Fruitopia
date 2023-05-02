@@ -44,11 +44,15 @@ def regsub(request):
         else:
             user=User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=ename,password=pwd)  # ORM insertion command
             user.save();
+            auth.login(request,user)
             return redirect('/')
     else:
         msg="Password incorrect..!"
         return render(request,"test2.html",{'val1':fname,'val2':lname,'val3':msg})  
 
+def logout(request):
+    auth.logout(request)
+    return redirect("/")
     
 
 
