@@ -168,19 +168,25 @@
         <h2>Comments</h2>
         
         <div class="commentbox">
-          {% for i in 'abcde' %}
+          {% if data.cmt.all %}
+          {% for i in data.cmt.all %} 
           <p>
-           <b>Good product </b>&nbsp;&nbsp;<small> 04/05/23 11:40AM</small><br>
-            <small>Akhil</small>&nbsp;&nbsp;
-            <font>20</font>
+           <b>{{i.msg}}</b>&nbsp;&nbsp;<small>{{i.date}}</small><br>
+            <small>{{i.user}}</small>&nbsp;&nbsp;
+            <font>{{i.like}}</font>
             <a href="like/"><img src="{% static 'images\like2.png' %}" alt="" width="15px" height="15px"></a>
           </p>
          
           {% endfor %}
+          {% else %}
+          <h2>no comments here</h2>
+          {% endif %}
         </div>
-        <form action="cmt/">
+        <form action="cmt/" method="GET">
         <div class="cmtentry">
-        <textarea name="" id="" cols="50" rows="" placeholder="Enter your comment..."></textarea><br>
+        <textarea name="cmtmsg" id="" cols="50" rows="" placeholder="Enter your comment..."></textarea><br>
+        <input name="user" type="hidden" value="{{user.username}}">
+        <input name="proid" type="hidden" value="{{data.id}}">
         <button type="submit">submit</button>          
         </form>
         </div>

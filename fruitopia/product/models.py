@@ -9,11 +9,17 @@ class fruits(models.Model):
     desc=models.TextField()
     date=models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
 class comment(models.Model):
     pro_id=models.ForeignKey(fruits,related_name='cmt',on_delete=models.CASCADE)
     
-    user=models.CharField(max_lenth=100)
+    user=models.CharField(max_length=100)
     msg=models.TextField()
     like=models.IntegerField()
     date=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user
 

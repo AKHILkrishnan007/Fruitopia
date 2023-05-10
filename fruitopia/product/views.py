@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .models import fruits
+from django.shortcuts import render,redirect
+from .models import fruits,comment
 
 # Create your views here.
 def details(request):
@@ -8,7 +8,13 @@ def details(request):
     return render(request,"about.html",{'data': obj})
 
 def cmt(request):
-    return render(request,'test.html')
+    imsg=request.GET['cmtmsg']
+    iuser=request.GET['user']
+    ipro=request.GET['proid']
+
+    obj=comment.objects.create(user=iuser,msg=imsg,pro_id_id=ipro,like=0)
+    obj.save()
+    return redirect('/product/?id='+ipro)
 
 def like(request):
     return render(request,'test.html')
