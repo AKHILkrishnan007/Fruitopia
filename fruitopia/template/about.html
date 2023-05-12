@@ -72,7 +72,15 @@
   border:none;
 
 }
-  </style>
+.recent {
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 25px;
+}
+.recent:hover{
+  scale: 1.1;
+}
+</style>
 </head>
 
 <body class="sub_page">
@@ -141,6 +149,9 @@
           <div class="img-box">
             <img src="{{data.img.url}}" alt="">
           </div>
+          {% for i in rec %}
+          <a href="{% url 'prod' %}?id={{i.id}}"><img class="recent" src="{{i.img.url}}" alt="" height="175px" width="175px"></a>
+          {% endfor %}
         </div>
         
        
@@ -174,7 +185,7 @@
            <b>{{i.msg}}</b>&nbsp;&nbsp;<small>{{i.date}}</small><br>
             <small>{{i.user}}</small>&nbsp;&nbsp;
             <font>{{i.like}}</font>
-            <a href="like/"><img src="{% static 'images\like2.png' %}" alt="" width="15px" height="15px"></a>
+            <a href="like/?id={{i.id}}"><img src="{% static 'images\like2.png' %}" alt="" width="15px" height="15px"></a>
           </p>
          
           {% endfor %}
@@ -184,7 +195,7 @@
         </div>
         <form action="cmt/" method="GET">
         <div class="cmtentry">
-        <textarea name="cmtmsg" id="" cols="50" rows="" placeholder="Enter your comment..."></textarea><br>
+        <textarea name="cmtmsg" id="" cols="50" rows="" placeholder="Enter your comment..." required></textarea><br>
         <input name="user" type="hidden" value="{{user.username}}">
         <input name="proid" type="hidden" value="{{data.id}}">
         <button type="submit">submit</button>          
