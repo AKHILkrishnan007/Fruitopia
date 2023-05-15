@@ -8,9 +8,13 @@ from product.models import fruits
 # Create your views here.
 def index(request):
     obj=fruits.objects.all()
+    if 'username' in request.COOKIES:
+        u=request.COOKIES['username']
+    else:
+        u=''
     print('hi',obj)
 
-    return render(request,"index.html",{'data':obj})
+    return render(request,"index.html",{'data':obj,'name':u})
 
 
 def test(request):
@@ -27,8 +31,12 @@ def logsub(request):
     pname=request.POST['pname']
     user=auth.authenticate(username=uname,password=pname)
     if user:
+
         auth.login(request,user)
-        return redirect("/")
+        res=redirect("/")
+        res.set_cookie('username',uname)
+        return res
+    
     return render(request,"login.html",{'val':user})
     
 
@@ -57,8 +65,10 @@ def regsub(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect("/")
-    
+
+    lg=redirect("/")
+    lg.delete_cookie('username')
+    return lg
 
 
 
