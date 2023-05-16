@@ -70,5 +70,7 @@ def logout(request):
     lg.delete_cookie('username')
     return lg
 
+def feed(request):
+    return render(request,'test.html')
 
 
