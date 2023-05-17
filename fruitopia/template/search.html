@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+<style>
+.searchbox{
+    background-color: rgba(203, 203, 185, 0.553);
+    width: 400px;
+    opacity: 20px;
+    margin-top: 200px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.searchbox input{
+    background-color: aliceblue;
+    width: 250px;
+    border-radius: 10px;
+    height: 30px;
+}
+.searchbox button{
+    background-color:crimson;
+    border-radius: 10px;
+    height: 30px;
+}
+</style>
+<!-- jquery script starting -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script>
+    $( function() {
+     
+      $( "#tags" ).autocomplete({
+        source: "{% url 'autocmplt' %}"
+      });
+    } );
+    </script>
+    <!-- jquery scripts ending -->
+</head>
+<body background="{% static 'images/pexels-wendy-van-zyl-1178610.jpg' %}">
+    <form action="{% url 'homepage' %}" method="POST">
+        {% csrf_token %}
+        <center>
+            <div class="searchbox">
+                <input id="tags" name="schitem" type="text" placeholder="Search here..." required>
+                <button type="submit"><font color="white">Search</font></button>
+            </div>
+        </center>
+    </form>
+</body>
+</html>

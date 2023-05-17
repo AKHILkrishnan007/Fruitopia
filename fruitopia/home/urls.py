@@ -10,4 +10,7 @@ urlpatterns = [
     path('reg/registersub/', views.regsub),
     path('logout/', views.logout),
     path('feed/', feed.latest()),
+    path('search/', views.sch),
+    path('search/searchsub/', views.schsub),
+    
 ]

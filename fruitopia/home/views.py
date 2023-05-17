@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.models import User
 from product.models import fruits
@@ -7,14 +6,14 @@ from product.models import fruits
 
 # Create your views here.
 def index(request):
-    obj=fruits.objects.all()
-    if 'username' in request.COOKIES:
-        u=request.COOKIES['username']
+    if request.method=='POST':
+        dis=request.POST['schitem']
+        obj=fruits.objects.filter(name__istartswith=dis)
     else:
-        u=''
+        obj=fruits.objects.all()
     print('hi',obj)
 
-    return render(request,"index.html",{'data':obj,'name':u})
+    return render(request,"index.html",{'data':obj})
 
 
 def test(request):
@@ -72,5 +71,12 @@ def logout(request):
 
 def feed(request):
     return render(request,'test.html')
+
+def sch(request):
+    return render(request,'search.html')
+
+def schsub(request):
+    schitem=request.GET['schitem']
+    return render(request,'test.html',{'item':schitem})
 
 
