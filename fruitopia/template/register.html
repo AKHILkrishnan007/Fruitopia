@@ -40,7 +40,7 @@
 <body background="{% static 'images\pexels-julia-nagy-1327838.jpg' %}">
     <center><div class="head">
         <h1>Registration</h1>
-        <form action="registersub/" method="post">
+        <form action="{% url 'register' %}" method="post">
             {% csrf_token %}
         <input type="text" placeholder="First name" required name="fname"><br><br>
         <input type="text" placeholder="Last name" name="lname"><br><br>
@@ -48,7 +48,8 @@
         <input type="email" placeholder="Email"m name="ename"><br><br>
         <input type="password" placeholder="Password" required name="pwd"><br><br>
         <input type="password" placeholder="Re-Password" required name="rpwd"><br><br>
-        <button type="submit">Submit</button>
+        <button type="submit">Submit</button><br>
+        <font color="red"><b><marquee behavior="" direction="left">{{val}}</marquee></b></font>
     </div></center></form>
     
 </body>

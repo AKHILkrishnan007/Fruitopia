@@ -4,10 +4,9 @@ from django.urls import path
 urlpatterns = [
     path('', views.index,name='homepage'),
     path('xyz/', views.test),
-    path('login/', views.log),
-    path('reg/', views.reg),
-    path('login/loginsub/', views.logsub),
-    path('reg/registersub/', views.regsub),
+    path('login/', views.log, name='loginpage'),
+    path('reg/', views.reg, name='register'),
+    # path('reg/registersub/', views.regsub),
     path('logout/', views.logout),
     path('feed/', feed.latest()),
     path('search/', views.sch),

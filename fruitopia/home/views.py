@@ -20,47 +20,52 @@ def test(request):
     return render(request,"test.html",{'val':'java'})
 
 def log(request):
-    return render(request,"login.html")
+    if request.method=='POST':
+        uname=request.POST['uname']
+        pname=request.POST['pname']
+        user=auth.authenticate(username=uname,password=pname)
+        if user:
+
+            auth.login(request,user)
+            res=redirect("/")
+            res.set_cookie('username',uname)
+            return res
+        msg="invalid username or password"
+        return render(request,"login.html",{'val':user,'msg':msg})
+    else:
+        return render(request,"login.html")
 
 def reg(request):
-    return render(request,"register.html")
-
-def logsub(request):
-    uname=request.POST['uname']
-    pname=request.POST['pname']
-    user=auth.authenticate(username=uname,password=pname)
-    if user:
-
-        auth.login(request,user)
-        res=redirect("/")
-        res.set_cookie('username',uname)
-        return res
-    
-    return render(request,"login.html",{'val':user})
-    
-
-def regsub(request):
-    fname=request.POST['fname']
-    lname=request.POST['lname']
-    ename=request.POST['ename']
-    uname=request.POST['uname']
-    pwd=request.POST['pwd']
-    rpwd=request.POST['rpwd']
-    if pwd==rpwd:
-        if User.objects.filter(username=uname):
-            msg="Username Exists..!"
-            return render(request,"test2.html",{'val1':msg,'val2':lname,'val3':ename})
-        elif User.objects.filter(email=ename):
-            msg="Email exists..!"
-            return render(request,"test2.html",{'val1':fname,'val2':lname,'val3':msg})
+    if request.method=='POST':
+        fname=request.POST['fname']
+        lname=request.POST['lname']
+        ename=request.POST['ename']
+        uname=request.POST['uname']
+        pwd=request.POST['pwd']
+        rpwd=request.POST['rpwd']
+        if pwd==rpwd:
+            if User.objects.filter(username=uname):
+                msg="Username Exists..!"
+                return render(request,"register.html",{'val':msg})
+            elif User.objects.filter(email=ename):
+                msg="Email exists..!"
+                return render(request,"register.html",{'val':msg})
+            else:
+                user=User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=ename,password=pwd)  # ORM insertion command
+                user.save();
+                auth.login(request,user)
+                return redirect('/')
         else:
-            user=User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=ename,password=pwd)  # ORM insertion command
-            user.save();
-            auth.login(request,user)
-            return redirect('/')
-    else:
-        msg="Password incorrect..!"
-        return render(request,"test2.html",{'val1':fname,'val2':lname,'val3':msg})  
+            msg="Password incorrect..!"
+            return render(request,"register.html",{'val':msg})
+    else: 
+        return render(request,"register.html")
+
+    
+    
+
+# def regsub(request):
+     
 
 def logout(request):
     auth.logout(request)

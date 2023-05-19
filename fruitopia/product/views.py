@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import fruits,comment
 from django.http import JsonResponse
+from django.core.cache import cache
 
 # Create your views here.
 def details(request):
@@ -22,6 +23,20 @@ def details(request):
 
     request.session.modified=True
     return render(request,"about.html",{'data': obj,'rec':rct})
+
+def details2(request):                 #function created for cache memory setup
+    iname=request.GET['id']
+
+    if cache.get(iname):
+        print("DATA FROM CACHE")
+        obj=cache.get(iname)
+
+    else:
+        print("DATA FROM DATABASE")
+        obj=fruits.objects.get(id=iname)  #orm command
+        cache.set(iname,obj)
+
+    return render(request,"about.html",{'data': obj})
 
 def cmt(request):
     imsg=request.GET['cmtmsg']

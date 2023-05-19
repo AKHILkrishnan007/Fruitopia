@@ -40,11 +40,12 @@
 <body background="{% static 'images\pexels-pixabay-89778.jpg' %}">
     <center><div class="head">
         <h1>login</h1>
-        <form action="loginsub/" method="post">
+        <form action="{% url 'loginpage' %}" method="post">
             {% csrf_token %}
         <input type="text" placeholder="Username" required name="uname"><br><br>
         <input type="password" placeholder="Password" required name="pname"><br><br>
-        <button type="submit">Submit</button>
+        <button type="submit">Submit</button><br>
+        <font color="red"><b><marquee behavior="" direction="left">{{msg}}</marquee></b></font>
     </form>
     </div></center>
 </body>

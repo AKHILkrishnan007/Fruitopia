@@ -134,3 +134,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #mediafiles
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+# cachefield
+
+CACHE_TTL=60*1500
+CACHE={
+    "default":{
+        'BACKEND':"django_redis.cash.RedisCashe",
+        'LOCATION':"radis://127.0.0.1:6379/1",
+        'OPTIONS':{
+            'CLIENT_CLASS':"django_redis.client.DefaultClient",
+        },
+        'KEY_PREFIX':"example",
+        
+    }
+}
